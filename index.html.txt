@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday 🎂</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    background: radial-gradient(circle at bottom, #1b1f3b, #0b0e1a);
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden;
+    color: #fff;
+}
+
+/* Card */
+.card {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    background: rgba(255,255,255,0.08);
+    padding: 45px;
+    border-radius: 25px;
+    box-shadow: 0 0 30px rgba(255, 200, 200, 0.3);
+    animation: zoomIn 1.2s ease;
+}
+
+h1 {
+    font-size: 46px;
+}
+
+h2 {
+    font-size: 32px;
+    color: #ffd166;
+}
+
+p {
+    font-size: 20px;
+    line-height: 1.7;
+}
+
+button {
+    margin-top: 25px;
+    padding: 14px 34px;
+    font-size: 18px;
+    border: none;
+    border-radius: 30px;
+    background: #ffd166;
+    color: #333;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #fff;
+    transform: scale(1.08);
+}
+
+/* Bóng bay */
+.balloon {
+    position: absolute;
+    bottom: -150px;
+    width: 45px;
+    height: 65px;
+    border-radius: 50%;
+    animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+    from { transform: translateY(0); }
+    to { transform: translateY(-120vh); }
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* Pháo hoa */
+.firework {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    animation: explode 1.2s ease-out forwards;
+}
+
+@keyframes explode {
+    from {
+        transform: scale(0);
+        opacity: 1;
+    }
+    to {
+        transform: scale(18);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h1>🎉 Happy Birthday 🎉</h1>
+
+    <!-- ✨ TÊN -->
+    <h2>Linh 💖</h2>
+
+    <!-- ✨ LỜI CHÚC -->
+    <p>
+        Chúc iem tuổi mới thật nhiều niềm vui 🌸<br>
+        Luôn khỏe mạnh, xinh đẹp và thành công 💐<br>
+        Mong mọi điều tốt đẹp nhất sẽ đến với iem ✨
+    </p>
+
+    <button onclick="boom()">
+        Nhấn để iem nhận pháo hoa 🎆
+    </button>
+</div>
+
+<script>
+/* Bóng bay */
+const balloonColors = ["#ff4d6d", "#ffd166", "#4cc9f0", "#9b5de5"];
+for (let i = 0; i < 18; i++) {
+    const b = document.createElement("div");
+    b.className = "balloon";
+    b.style.left = Math.random() * 100 + "vw";
+    b.style.background = balloonColors[Math.floor(Math.random()*balloonColors.length)];
+    b.style.animationDuration = (6 + Math.random()*5) + "s";
+    document.body.appendChild(b);
+}
+
+/* Pháo hoa */
+function firework(x, y) {
+    const fw = document.createElement("div");
+    fw.className = "firework";
+    fw.style.left = x + "px";
+    fw.style.top = y + "px";
+    fw.style.background = `hsl(${Math.random()*360},100%,60%)`;
+    document.body.appendChild(fw);
+
+    setTimeout(() => fw.remove(), 1200);
+}
+
+/* Bắn pháo hoa khi bấm */
+function boom() {
+    for (let i = 0; i < 10; i++) {
+        setTimeout(() => {
+            firework(
+                Math.random() * window.innerWidth,
+                Math.random() * window.innerHeight * 0.6
+            );
+        }, i * 150);
+    }
+}
+
+/* Pháo hoa tự động */
+setInterval(() => {
+    firework(
+        Math.random() * window.innerWidth,
+        Math.random() * window.innerHeight * 0.5
+    );
+}, 1200);
+</script>
+
+</body>
+</html>
